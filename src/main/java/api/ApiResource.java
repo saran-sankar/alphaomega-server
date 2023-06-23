@@ -123,8 +123,17 @@ public class ApiResource {
         }
     }
 
-    // TODO Implement the following APIs
-    // categories/name/{category-name}/suggested-books
-    // categories/name/{category-name}/suggested-books?limit=#
+    @GET
+    @Path("categories/name/{category-name}/suggested-books")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Book> suggestedBooksByCategoryName(@PathParam("category-name") String categoryName,
+                                     @QueryParam("limit") @DefaultValue("3") int limit,
+                                     @Context HttpServletRequest request) {
+        try {
+            return bookDao.findRandomByCategoryName(categoryName, limit);
+        } catch (Exception e) {
+            throw new ApiException("products lookup via categoryName failed", e);
+        }
+    }
 
 }

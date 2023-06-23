@@ -25,9 +25,18 @@ public class BookDaoJdbc implements BookDao {
             "WHERE category_id = ?";
 
     private static final String FIND_RANDOM_BY_CATEGORY_ID_SQL =
-            "SELECT book_id, title, author, price, is_public, category_id " +
+            "SELECT book_id, title, author, description, price, rating, is_public, is_featured, category_id " +
                     "FROM book " +
                     "WHERE category_id = ? " +
+                    "ORDER BY RAND() " +
+                    "LIMIT ?";
+
+    private static final String FIND_RANDOM_BY_CATEGORY_NAME_SQL =
+            "SELECT book_id, title, author, description, price, rating, is_public, is_featured, book.category_id " +
+                    "FROM book " +
+                    "JOIN category " +
+                    "ON book.category_id = category.category_id " +
+                    "WHERE category.name = ? " +
                     "ORDER BY RAND() " +
                     "LIMIT ?";
 
@@ -71,7 +80,38 @@ public class BookDaoJdbc implements BookDao {
     public List<Book> findRandomByCategoryId(long categoryId, int limit) {
         List<Book> books = new ArrayList<>();
 
-        // TODO Implement this method
+        try (Connection connection = JdbcUtils.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_RANDOM_BY_CATEGORY_ID_SQL)) {
+            statement.setLong(1, categoryId);
+            statement.setInt(2, limit);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    books.add(readBook(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            throw new BookstoreQueryDbException("Encountered a problem finding random books by category " + categoryId, e);
+        }
+
+        return books;
+    }
+
+    @Override
+    public List<Book> findRandomByCategoryName(String categoryName, int limit) {
+        List<Book> books = new ArrayList<>();
+
+        try (Connection connection = JdbcUtils.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_RANDOM_BY_CATEGORY_NAME_SQL)) {
+            statement.setString(1, categoryName);
+            statement.setInt(2, limit);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    books.add(readBook(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            throw new BookstoreQueryDbException("Encountered a problem finding random books by category " + categoryName, e);
+        }
 
         return books;
     }

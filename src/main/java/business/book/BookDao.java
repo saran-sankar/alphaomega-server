@@ -10,4 +10,6 @@ public interface BookDao {
 
     public List<Book> findRandomByCategoryId(long categoryId, int limit);
 
+    public List<Book> findRandomByCategoryName(String categoryId, int limit);
+
 }
