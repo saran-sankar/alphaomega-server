@@ -92,6 +92,21 @@ public class ApiResource {
     }
 
     // TODO Implement the following APIs
+    @GET
+    @Path("categories/name/{category-name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Category categoryByName(@PathParam("category-name") String categoryName,
+                                 @Context HttpServletRequest httpRequest) {
+        try {
+            Category result = categoryDao.findByName(categoryName);
+            if (result == null) {
+                throw new ApiException(String.format("No such category id: %s", categoryName));
+            }
+            return result;
+        } catch (Exception e) {
+            throw new ApiException(String.format("Category lookup by category-name %s failed", categoryName), e);
+        }
+    }
     // categories/name/{category-name}
     // categories/name/{category-name}/books
     // categories/name/{category-name}/suggested-books
