@@ -91,7 +91,6 @@ public class ApiResource {
         }
     }
 
-    // TODO Implement the following APIs
     @GET
     @Path("categories/name/{category-name}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -107,8 +106,24 @@ public class ApiResource {
             throw new ApiException(String.format("Category lookup by category-name %s failed", categoryName), e);
         }
     }
-    // categories/name/{category-name}
-    // categories/name/{category-name}/books
+
+    @GET
+    @Path("categories/name/{category-name}/books")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Book> booksByCategoryName(@PathParam("category-name") String categoryName,
+                                        @Context HttpServletRequest httpRequest) {
+        try {
+            Category category = categoryDao.findByName(categoryName);
+            if (category == null) {
+                throw new ApiException(String.format("No such category id: %s", categoryName));
+            }
+            return bookDao.findByCategoryId(category.categoryId());
+        } catch (Exception e) {
+            throw new ApiException(String.format("Books lookup by category-name %s failed", categoryName), e);
+        }
+    }
+
+    // TODO Implement the following APIs
     // categories/name/{category-name}/suggested-books
     // categories/name/{category-name}/suggested-books?limit=#
 
