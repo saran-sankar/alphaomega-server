@@ -1,0 +1,106 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection) or
+# paste cURL into the file and request will be converted to HTTP Request format.
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+GET http://localhost:8080/SaranBookstoreOrder/api/categories
+Accept: application/json
+
+###
+
+# curl 'http://localhost:8080/SaranBookstoreOrder/api/orders'
+#  -H 'Accept: */*'
+#  -H 'Accept-Language: en-US,en;q=0.9'
+#  -H 'Cache-Control: max-age=0'
+#  -H 'Connection: keep-alive'
+#  -H 'Content-Type: application/json'
+#  -H 'Origin: http://localhost:5173'
+#  -H 'Referer: http://localhost:5173/'
+#  -H 'Sec-Fetch-Dest: empty'
+#  -H 'Sec-Fetch-Mode: cors'
+#  -H 'Sec-Fetch-Site: same-site'
+#  -H 'User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36'
+#  -H 'sec-ch-ua: "Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"'
+#  -H 'sec-ch-ua-mobile: ?1'
+#  -H 'sec-ch-ua-platform: "Android"'
+#  --data-raw '{"cart":{"itemArray":[{"book":{"bookId":1002,"title":"Confessions","author":"Saint Augustine","description":"","price":799,"rating":0,"isPublic":false,"isFeatured":false,"categoryId":1001},"quantity":2},{"book":{"bookId":1003,"title":"Paradise Lost","author":"John Milton","description":"","price":599,"rating":0,"isPublic":true,"isFeatured":false,"categoryId":1001},"quantity":1},{"book":{"bookId":1001,"title":"The Divine Comedy","author":"Dante Alighieri","description":"","price":699,"rating":0,"isPublic":true,"isFeatured":false,"categoryId":1001},"quantity":3}]},"customerForm":{"name":"Saran Sankar","address":"1800 Susquehannock Dr.","phone":"2027665595","email":"saran_sankar@icloud.com","ccNumber":"4444333322221111","ccExpiryMonth":7,"ccExpiryYear":2028}}'
+#  --compressed
+POST http://cs5244.cs.vt.edu:8080/SaranBookstoreOrder/api/orders
+Accept: */*
+Accept-Language: en-US,en;q=0.9
+Cache-Control: max-age=0
+Connection: keep-alive
+Origin: http://localhost:5173
+Referer: http://localhost:5173/
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-site
+User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [
+      {
+        "book": {
+          "bookId": 1002,
+          "title": "Confessions",
+          "author": "Saint Augustine",
+          "description": "",
+          "price": 799,
+          "rating": 0,
+          "isPublic": false,
+          "isFeatured": false,
+          "categoryId": 1001
+        },
+        "quantity": 2
+      },
+      {
+        "book": {
+          "bookId": 1003,
+          "title": "Paradise Lost",
+          "author": "John Milton",
+          "description": "",
+          "price": 599,
+          "rating": 0,
+          "isPublic": true,
+          "isFeatured": false,
+          "categoryId": 1001
+        },
+        "quantity": 1
+      },
+      {
+        "book": {
+          "bookId": 1001,
+          "title": "The Divine Comedy",
+          "author": "Dante Alighieri",
+          "description": "",
+          "price": 699,
+          "rating": 0,
+          "isPublic": true,
+          "isFeatured": false,
+          "categoryId": 1001
+        },
+        "quantity": 3
+      }
+    ]
+  },
+  "customerForm": {
+    "name": "S",
+    "address": "A",
+    "phone": "2027665595",
+    "email": "saran_sankar@icloud.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 8,
+    "ccExpiryYear": 2023
+  }
+}
+
+###
+
